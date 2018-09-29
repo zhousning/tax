@@ -1,0 +1,49 @@
+%nav.navbar.navbar-inverse
+  .container-fluid
+    .navbar-header
+      = link_to root_path, :class => "navbar-brand padding-0" do
+        =image_tag "logo.png"
+    %ul.nav.navbar-nav
+      %li
+        = link_to Setting.invoices.index, invoices_path
+      %li
+        %a{:href => "#"} 了解产品
+        -#
+          = link_to Setting.home.develop_tool, "http://www.gitdebug.com", :target => "_blank"
+      %li
+        -#
+          = link_to Setting.home.tutorial, "https://shop527029490.taobao.com", :target => "_blank"
+    %ul.nav.navbar-nav.navbar-right
+      - unless user_signed_in?
+        %li
+          %a{:href => "#"}
+            %span.glyphicon.glyphicon-question-sign
+            HELP
+        %li
+          = link_to new_user_registration_path do
+            %span.glyphicon.glyphicon-user
+              注册
+        %li
+          = link_to "登录", new_user_session_path
+      - else
+        %li
+          = link_to current_user.email, nil
+        %li
+          %a{:href=>destroy_user_session_path, "data-method"=>"delete"} 注销
+    -#
+      %li
+        %a{"data-target" => "#login-modal", "data-toggle" => "modal", :href => "#"} Login
+  -#
+    #login-modal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :style => "display: none;", :tabindex => "-1"}
+      .modal-dialog
+        .loginmodal-container
+          %h1 Login to Your Account
+          %br/
+          %form
+            %input{:name => "user", :placeholder => "Username", :type => "text"}/
+            %input{:name => "pass", :placeholder => "Password", :type => "password"}/
+            %input.login.loginmodal-submit{:name => "login", :type => "submit", :value => "Login"}/
+          .login-help
+            %a{:href => "gettingstarted.html"} Register
+            \-
+            %a{:href => "#"} Forgot Password

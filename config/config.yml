@@ -1,0 +1,12 @@
+defaults: &defaults
+  invoices:
+    index: '查看票据'
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

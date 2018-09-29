@@ -1,0 +1,16 @@
+zh-CN:
+  layouts:
+    application:
+      site_title: "玛瑙"
+
+  home:
+    index:
+      title: "玛瑙 - rails项目模板"
+    about:
+      title: "公司简介"
+    intro:
+      title: "了解产品"
+    jobs:
+      title: "诚聘英才"
+    contact:
+      title: "联系我们"
