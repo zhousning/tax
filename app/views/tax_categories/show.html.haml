@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @tax_category.name
+%p
+  %b Code:
+  = @tax_category.code
+
+= link_to 'Edit', edit_tax_category_path(@tax_category)
+\|
+= link_to 'Back', tax_categories_path

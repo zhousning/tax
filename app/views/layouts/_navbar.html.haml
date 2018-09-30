@@ -5,9 +5,9 @@
         =image_tag "logo.png"
     %ul.nav.navbar-nav
       %li
-        = link_to Setting.invoices.index, invoices_path
+        = link_to Setting.tax_categories.index, tax_categories_path
       %li
-        %a{:href => "#"} 了解产品
+        = link_to Setting.buyers.index, buyers_path
         -#
           = link_to Setting.home.develop_tool, "http://www.gitdebug.com", :target => "_blank"
       %li

@@ -1,6 +1,10 @@
 defaults: &defaults
   invoices:
     index: '查看票据'
+  tax_categories:
+    index: '商品税收分类编码库'
+  buyers:
+    index: '客户信息库'
 
 development:
   <<: *defaults

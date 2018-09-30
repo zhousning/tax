@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Alias:
+  = @buyer.alias
+%p
+  %b Name:
+  = @buyer.name
+%p
+  %b Duty paragraph:
+  = @buyer.duty_paragraph
+%p
+  %b Account:
+  = @buyer.account
+%p
+  %b Phone:
+  = @buyer.phone
+
+= link_to 'Edit', edit_buyer_path(@buyer)
+\|
+= link_to 'Back', buyers_path

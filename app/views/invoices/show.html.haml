@@ -22,6 +22,6 @@
   %b Tax money:
   = @invoice.tax_money
 
-= link_to 'Edit', edit_invoice_path(@invoice)
+= link_to 'Edit', edit_buyer_invoice_path(@buyer, @invoice)
 \|
-= link_to 'Back', invoices_path
+= link_to 'Back', buyer_invoices_path(@buyer, @invoice)

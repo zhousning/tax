@@ -15,4 +15,6 @@
 #
 
 class Invoice < ActiveRecord::Base
+  belongs_to :tax_category
+  belongs_to :buyer
 end

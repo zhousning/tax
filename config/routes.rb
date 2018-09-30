@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :tax_categories
   root 'home#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -10,7 +11,11 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
 
-  resources :invoices do
+  resources :buyers do
+    resources :invoices 
+  end
+
+  resources :invoices, :only => [] do
     collection do
       get 'export_xml'
     end

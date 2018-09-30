@@ -1,38 +1,46 @@
 require "rexml/document" 
 
 class InvoicesController < ApplicationController
+  before_action :authenticate_user!, :get_buyer
 
   def index
-    @invoices = Invoice.all
+    @invoices = @buyer.invoices.all
+  end
+
+  def new
+    @invoice = Invoice.new
+    @tax_categories = TaxCategory.all
+  end
+
+  def create
+    @invoice = Invoice.new(invoice_params)
+    @invoice.buyer = @buyer
+    @tax_category = TaxCategory.find(tax_category_params[:tax_category_id])
+    @invoice.tax_category = @tax_category
+    if @invoice.save
+      redirect_to buyer_invoice_url(@buyer, @invoice)
+    else
+      render :new
+    end
   end
 
   def show
     @invoice = Invoice.find(params[:id])
   end
 
-  def new
-    @invoice = Invoice.new
-  end
-
   def edit
     @invoice = Invoice.find(params[:id])
+    @tax_categories = TaxCategory.all
   end
 
   def update
+    @tax_category = TaxCategory.find(tax_category_params[:tax_category_id])
     @invoice = Invoice.find(params[:id])
+    @invoice.tax_category = @tax_category
     if @invoice.update(invoice_params)
-      redirect_to invoice_path(@invoice) 
+      redirect_to buyer_invoice_path(@buyer, @invoice)
     else
       render :edit
-    end
-  end
-
-  def create
-    @invoice = Invoice.new(invoice_params)
-    if @invoice.save
-      redirect_to @invoice
-    else
-      render :new
     end
   end
 
@@ -112,8 +120,16 @@ class InvoicesController < ApplicationController
 
   private
 
+    def get_buyer 
+      @buyer = Buyer.find(params[:buyer_id])
+    end
+
     def invoice_params
-      params.require(:invoice).permit(:standard, :unit, :amount, :tax_unit_price, :tax_total, :cess, :tax_money)
+      params.require(:invoice).permit(:standard, :unit, :amount, :tax_unit_price, :tax_total, :cess, :tax_money, :tax_category_attributes)
+    end
+
+    def tax_category_params
+      params.require(:invoice).permit(:tax_category_id)
     end
 end
 

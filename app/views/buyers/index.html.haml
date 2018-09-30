@@ -1,0 +1,30 @@
+%h1 Listing buyers
+
+%table
+  %thead
+    %tr
+      %th Alias
+      %th Name
+      %th Duty paragraph
+      %th Account
+      %th Phone
+      %th
+      %th
+      %th
+
+  %tbody
+    - @buyers.each do |buyer|
+      %tr
+        %td= buyer.alias
+        %td= buyer.name
+        %td= buyer.duty_paragraph
+        %td= buyer.account
+        %td= buyer.phone
+        %td= link_to 'Show', buyer
+        %td= link_to 'Edit', edit_buyer_path(buyer)
+        %td= link_to 'Destroy', buyer, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td= link_to '发票列表', buyer_invoices_path(buyer)
+
+%br
+
+= link_to 'New Buyer', new_buyer_path
