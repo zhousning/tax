@@ -1,7 +1,7 @@
 %h1 Listing invoices
 
 %p
-  = link_to "导出XML", export_xml_invoices_path, :class => 'btn btn-primary'
+  = link_to "导出XML", export_xml_buyer_invoices_path(@buyer), :class => 'btn btn-primary'
 %table
   %thead
     %tr

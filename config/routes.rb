@@ -12,13 +12,14 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
 
   resources :buyers do
-    resources :invoices 
+    resources :invoices do 
+      collection do
+        get 'export_xml'
+      end
+    end
   end
 
   resources :invoices, :only => [] do
-    collection do
-      get 'export_xml'
-    end
   end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

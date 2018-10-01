@@ -1,4 +1,5 @@
 require "rexml/document" 
+require "builder"
 
 class InvoicesController < ApplicationController
   before_action :authenticate_user!, :get_buyer
@@ -51,71 +52,62 @@ class InvoicesController < ApplicationController
   end
 
   def export_xml
-    file = File.new(File.join(Rails.root, "public", 'test.xml'),"w+")
-    doc = REXML::Document.new
-    kp = doc.add_element ('Kp')
-    version = kp.add_element( 'Version')
-    version.add_text "2.0"
-    fpxx = kp.add_element('Fpxx')
-    zsl = fpxx.add_element('Zsl')
-    zsl.add_text "1"
-    fpsj = fpxx.add_element('Fpsj')
-    fp = fpsj.add_element('Fp')
-    djh = fp.add_element('Djh')
-    djh.add_text '1'
-    gfmc = fp.add_element('Gfmc')
-    gfmc.add_text '祈祷'
-    gfsh = fp.add_element('Gfsh')
-    gfyhzh = fp.add_element('Gfyhzh')
-    gfdzdh = fp.add_element('Gfdzdh')
-    bz = fp.add_element('Bz')
-    fhr = fp.add_element('Fhr')
-    skr = fp.add_element('Skr')
-    spbmbbh = fp.add_element('Spbmbbh')
-    spbmbbh.add_text '30.0'
-    hsbz = fp.add_element('Hsbz')
-    hsbz.add_text '30.0'
-    sgbz = fp.add_element('Sgbz')
-    sgbz.add_text '30.0'
-    spxx = fp.add_element('Spxx')
+    xml_str = ""
+    xml = Builder::XmlMarkup.new(:target=>xml_str, :indent=>2)
+    xml.instruct!
+    xml.kp {
+      xml.Version('2.0')
+      xml.Fpxx {
+        xml.Zsl(1)
+        xml.Fpsj {
+          xml.Fp {
+            xml.Djh(1)
+            xml.Gfmc(@buyer.name)
+            xml.Gfsh(@buyer.duty_paragraph)
+            xml.Gfyhzh(@buyer.account)
+            xml.Gfdzdh(@buyer.phone)
+            xml.Bz(@buyer.remark)
+            xml.Fhr(@buyer.checker)
+            xml.Skr(@buyer.payee)
+            xml.Spbmbh(30.0)
+            xml.Hsbz(0)
+            xml.Sgbz(0)
 
-    @invoices = Invoice.all
-    @invoices.each do |i|
-      sph = spxx.add_element('Sph')
-      xh = sph.add_element('Xh')
-      xh.add_text '1'
-      spbm = sph.add_element('Spbm')
-      spbm.add_text '3333333'
-      qyspbm = sph.add_element('Qyspbm')
-      syyhzcbz = sph.add_element('Syyhzcbz')
-      syyhzcbz = syyhzcbz.add_text '3333'
-      yhzcsm = sph.add_element('Yhzcsm')
-      lslbz = sph.add_element('Lslbz')
+            xml.Spxx {
+              @buyer.invoices.each_with_index do |i, index|
+                xml.Sph {
+                  xml.Xh(index + 1)
+                  xml.Spbm(i.tax_category.code)
+                  xml.Qyspbm()
+                  xml.Syyhzcbz(0)
+                  xml.Yhzcsm()
+                  xml.Lslbz()
 
-      spmc = sph.add_element('Spmc')
-      spmc.add_text'缸套' 
-      ggxh = sph.add_element('Ggxh')
-      jldw = sph.add_element('Jldw')
-      jldw.add_text i.unit
-      dj = sph.add_element('Dj')
-      dj.add_text i.tax_unit_price
-      sl = sph.add_element('Sl')
-      sl.add_text i.amount
-      je = sph.add_element('Je')
-      je.add_text i.tax_total
-      slv = sph.add_element('Slv')
-      slv.add_text i.cess
-      se = sph.add_element('Se')
-      se.add_text i.tax_money
-      kce = sph.add_element('Kce')
-      kce.add_text '0'
+                  xml.Spmc(i.tax_category.name)
+                  xml.Ggxh(i.standard)
+                  xml.Jldw(i.unit)
+                  xml.Dj(i.tax_unit_price)
+                  xml.Sl(i.amount)
+                  xml.Je(i.tax_total)
+                  xml.Slv(i.cess)
+                  xml.Se(i.tax_money)
+                  xml.Kce(0)
+                }
+              end
+            }
+          }
+        }
+      }
+    }
+  
+    template_dir = File.join(Rails.root, "public", "template")
+    Dir::mkdir(template_dir) unless File.directory?(template_dir)
+    target_xml = File.join(Rails.root, "public", "template", @buyer.name + '发票模板.xml') 
+    File.open(target_xml, "w+") do |file|
+      file.write xml_str
     end
 
-    File.open(File.join(Rails.root, "public", 'test2.xml'),"w+") do |file|
-      file.write doc
-    end
-
-    send_file File.join(Rails.root, "public", 'test2.xml'), :filename => "test.xml", :type => "application/force-download", :x_sendfile=>true
+    send_file target_xml, :filename => @buyer.name + '发票模板.xml', :type => "application/force-download", :x_sendfile=>true
   end
 
   private

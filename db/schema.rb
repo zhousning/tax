@@ -14,14 +14,17 @@
 ActiveRecord::Schema.define(version: 20180930110154) do
 
   create_table "buyers", force: :cascade do |t|
-    t.string   "alias"
-    t.string   "name"
-    t.string   "duty_paragraph"
-    t.string   "account"
-    t.string   "phone"
+    t.string   "alias",          default: "", null: false
+    t.string   "name",           default: "", null: false
+    t.string   "duty_paragraph", default: "", null: false
+    t.string   "account",        default: "", null: false
+    t.string   "phone",          default: "", null: false
+    t.string   "remark",         default: "", null: false
+    t.string   "checker",        default: "", null: false
+    t.string   "payee",          default: "", null: false
     t.integer  "user_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   create_table "invoices", force: :cascade do |t|
