@@ -1,5 +1,6 @@
 class TaxCategoriesController < ApplicationController
-  before_action :authenticate_user!
+  layout "application_control"
+  load_and_authorize_resource
 
   def index
     @tax_categories = current_user.tax_categories.all

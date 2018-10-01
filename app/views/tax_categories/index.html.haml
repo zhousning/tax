@@ -1,23 +1,30 @@
-%h1 Listing tax_categories
+- provide(:title, t('.title'))
 
-%table
-  %thead
-    %tr
-      %th Name
-      %th Code
-      %th
-      %th
-      %th
+- content_for :lgside_body do
+  .container
+    .row
+      .col-md-3
+        = render "layouts/system_search"
+      .col-md-2
+        = link_to '添加商品税收分类编码', new_tax_category_path, :class => "btn btn-info"
+    .row.buyer-table-ctn
+      .col-md-12
+        %table.table.text-center.table-bordered.table-list-search
+          %thead
+            %tr
+              %th #
+              %th 商品名称 
+              %th 税收分类编码
+              %th
+          %tbody
+            - @tax_categories.each_with_index do |tax_category, index|
+              %tr
+                %td= index+1
+                %td= tax_category.name
+                %td= tax_category.code
+                %td
+                  = link_to '编辑', edit_tax_category_path(tax_category), :class => "btn btn-success"
+                  = link_to '删除', tax_category, :method => :delete, :data => { :confirm => '确定删除?' }, :class => "btn btn-danger"
+  
 
-  %tbody
-    - @tax_categories.each do |tax_category|
-      %tr
-        %td= tax_category.name
-        %td= tax_category.code
-        %td= link_to 'Show', tax_category
-        %td= link_to 'Edit', edit_tax_category_path(tax_category)
-        %td= link_to 'Destroy', tax_category, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Tax category', new_tax_category_path
+= render "layouts/control_panel"

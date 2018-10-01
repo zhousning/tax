@@ -1,5 +1,7 @@
-%h1 New buyer
+- provide(:title, t('.title'))
 
-= render 'form'
+- content_for :lgside_body do
 
-= link_to 'Back', buyers_path
+  = render 'form'
+  
+= render "layouts/control_panel"

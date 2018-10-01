@@ -1,0 +1,18 @@
+= form_for @role do |f|
+  .mail-option
+    .chk-all
+      = f.label "角色名称" 
+      = f.text_field :name
+    -if request.path != new_role_path
+      = link_to '角色详情', @role, :class => "btn btn-default"
+    = f.submit '保存', :class => "btn btn-default"
+  %table.table.table-inbox.table-hover
+    %tbody
+      - @permissions.each do |permission|
+        %tr.unread
+          %td.inbox-small-cells
+            - permission.each do |p|
+              %label.checkbox-inline
+                = check_box_tag 'permissions[]', p.id, @role_permissions.include?(p.id), {array: true, class: "mail-checkbox"} 
+                = p.name
+

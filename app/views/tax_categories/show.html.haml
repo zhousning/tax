@@ -1,12 +1,25 @@
-%p#notice= notice
+- provide(:title, t('.title'))
 
-%p
-  %b Name:
-  = @tax_category.name
-%p
-  %b Code:
-  = @tax_category.code
+- content_for :lgside_body do
+  .container
+    .row.buyer-table-ctn
+      .col-md-12
+        %table.table.text-center.table-bordered.table-list-search
+          %thead
+            %tr
+              %th #
+              %th 商品名称 
+              %th 税收分类编码
+              %th
+          %tbody
+            %tr
+              %td= 1
+              %td 
+                = @tax_category.name
+              %td 
+                = @tax_category.code
+              %td
+                = link_to '编辑', edit_tax_category_path(@tax_category), :class => "btn btn-success"
+                = link_to '返回', tax_categories_path, :class => "btn btn-danger"
 
-= link_to 'Edit', edit_tax_category_path(@tax_category)
-\|
-= link_to 'Back', tax_categories_path
+= render "layouts/control_panel"

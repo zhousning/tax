@@ -1,15 +1,16 @@
 Rails.application.routes.draw do
-  resources :tax_categories
   root 'home#index'
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
 
   devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }
   devise_scope :user do
     # get 'login_validate', to: 'users/sessions#login_validate'
   end
 
-  # You can have the root of your site routed with "root"
+  resources :users do
+    get :control, :on => :collection
+  end
+
+  resources :roles
 
   resources :buyers do
     resources :invoices do 
@@ -19,8 +20,8 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :invoices, :only => [] do
-  end
+  resources :tax_categories
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

@@ -1,16 +1,87 @@
 zh-CN:
   layouts:
     application:
-      site_title: "玛瑙"
+      site_title: "开票助手"
+    application_control:
+      site_title: "开票助手"
 
   home:
     index:
-      title: "玛瑙 - rails项目模板"
-    about:
-      title: "公司简介"
-    intro:
-      title: "了解产品"
-    jobs:
-      title: "诚聘英才"
-    contact:
-      title: "联系我们"
+      title: "首页"
+
+  invoices:
+    manage:
+      title: "发票管理"
+    index:
+      title: "发票列表"
+    new:
+      title: "添加发票"
+    show:
+      title: "查看发票"
+    edit:
+      title: "编辑发票"
+
+  buyers:
+    manage:
+      title: "客户管理"
+    index:
+      title: "客户列表"
+    new:
+      title: "添加客户"
+    show:
+      title: "查看客户"
+    edit:
+      title: "编辑客户"
+
+  tax_categories:
+    manage:
+      title: "税收分类编码管理"
+    index:
+      title: "税收分类编码列表"
+    new:
+      title: "新建税收分类编码"
+    show:
+      title: "查看税收分类编码"
+    edit:
+      title: "编辑税收分类编码"
+
+  users:
+    control:
+      title: "个人中心"
+    manage:
+      title: "管理用户"
+    index:
+      title: "用户列表"
+    show:
+      title: "用户详情"
+    edit:
+      title: "编辑用户"
+    registrations:
+      new:
+        title: "用户注册"
+    confirmations:
+      new:
+        title: "重新发送邮件"
+    sessions:
+      new:
+        title: "用户登录"
+    binding:
+      title: "绑定帐号"
+    sendmail:
+      title: "邮件已发送"
+    confirm:
+      title: "邮箱已确认"
+    agreement:
+      title: "用户协议"
+
+  roles:
+    manage:
+      title: "管理角色"
+    index:
+      title: "角色列表"
+    new:
+      title: "新建角色"
+    show:
+      title: "角色详情"
+    edit:
+      title: "编辑角色"

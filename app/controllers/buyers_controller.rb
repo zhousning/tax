@@ -1,5 +1,6 @@
 class BuyersController < ApplicationController
-  before_action :authenticate_user!
+  layout "application_control"
+  load_and_authorize_resource
 
   def index
     @buyers = current_user.buyers.all

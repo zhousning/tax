@@ -53,9 +53,9 @@ gem 'haml-rails'
 
 gem 'devise'
 
-#gem 'cancancan'
+gem 'cancancan'
 
-#gem 'rolify'
+gem 'rolify'
 
 gem 'annotate'
 

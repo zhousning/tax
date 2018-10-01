@@ -1,0 +1,17 @@
+- provide(:title, t('.title'))
+
+- content_for :lgside_body do
+  .mail-option
+    .chk-all
+      %label 用户名称： 
+      = @user.email
+    = link_to '编辑用户', edit_user_path(@user), :class => "btn btn-default"
+  %table.table.table-inbox.table-hover
+    %tbody
+      - @roles.each do |role|
+        %tr.unread
+          %td.inbox-small-cells
+            %label.checkbox-inline
+              = role.name
+
+= render "layouts/control_panel"

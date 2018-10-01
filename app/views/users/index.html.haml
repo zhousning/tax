@@ -1,0 +1,19 @@
+- provide(:title, t('.title'))
+
+- content_for :lgside_body do
+  %table.table.table-inbox.table-hover
+    %tbody
+      - @users.each do |user|
+        %tr.unread
+          %td.inbox-small-cells
+            = user.id
+          %td.view-message.dont-show
+            = user.email
+          %td.view-message.dont-show
+            - user.roles.each do |role|
+              %label.checkbox-inline
+                = role.name
+          %td.view-message.text-right
+            = link_to "编辑", edit_user_path(user), :class => "btn btn-default"
+
+= render "layouts/control_panel"

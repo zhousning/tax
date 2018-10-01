@@ -1,27 +1,31 @@
-%p#notice= notice
+- provide(:title, t('.title'))
 
-%p
-  %b Standard:
-  = @invoice.standard
-%p
-  %b Unit:
-  = @invoice.unit
-%p
-  %b Amount:
-  = @invoice.amount
-%p
-  %b Tax unit price:
-  = @invoice.tax_unit_price
-%p
-  %b Tax total:
-  = @invoice.tax_total
-%p
-  %b Cess:
-  = @invoice.cess
-%p
-  %b Tax money:
-  = @invoice.tax_money
+- content_for :lgside_body do
+  
+  %p
+    %b Standard:
+    = @invoice.standard
+  %p
+    %b Unit:
+    = @invoice.unit
+  %p
+    %b Amount:
+    = @invoice.amount
+  %p
+    %b Tax unit price:
+    = @invoice.tax_unit_price
+  %p
+    %b Tax total:
+    = @invoice.tax_total
+  %p
+    %b Cess:
+    = @invoice.cess
+  %p
+    %b Tax money:
+    = @invoice.tax_money
+  
+  = link_to 'Edit', edit_buyer_invoice_path(@buyer, @invoice)
+  \|
+  = link_to 'Back', buyer_invoices_path(@buyer, @invoice)
 
-= link_to 'Edit', edit_buyer_invoice_path(@buyer, @invoice)
-\|
-= link_to 'Back', buyer_invoices_path(@buyer, @invoice)
+= render "layouts/control_panel"

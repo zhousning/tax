@@ -1,35 +1,38 @@
-%h1 Listing invoices
+- provide(:title, t('.title'))
 
-%p
-  = link_to "导出XML", export_xml_buyer_invoices_path(@buyer), :class => 'btn btn-primary'
-%table
-  %thead
-    %tr
-      %th Standard
-      %th Unit
-      %th Amount
-      %th Tax unit price
-      %th Tax total
-      %th Cess
-      %th Tax money
-      %th
-      %th
-      %th
-
-  %tbody
-    - @invoices.each do |invoice|
+- content_for :lgside_body do
+  %p
+    = link_to "导出XML", export_xml_buyer_invoices_path(@buyer), :class => 'btn btn-primary'
+  %table
+    %thead
       %tr
-        %td= invoice.standard
-        %td= invoice.unit
-        %td= invoice.amount
-        %td= invoice.tax_unit_price
-        %td= invoice.tax_total
-        %td= invoice.cess
-        %td= invoice.tax_money
-        %td= link_to 'Show', buyer_invoice_path(@buyer, invoice)
-        %td= link_to 'Edit', edit_buyer_invoice_path(@buyer, invoice)
-        %td= link_to 'Destroy', [@buyer, invoice], :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %th Standard
+        %th Unit
+        %th Amount
+        %th Tax unit price
+        %th Tax total
+        %th Cess
+        %th Tax money
+        %th
+        %th
+        %th
+  
+    %tbody
+      - @invoices.each do |invoice|
+        %tr
+          %td= invoice.standard
+          %td= invoice.unit
+          %td= invoice.amount
+          %td= invoice.tax_unit_price
+          %td= invoice.tax_total
+          %td= invoice.cess
+          %td= invoice.tax_money
+          %td= link_to 'Show', buyer_invoice_path(@buyer, invoice)
+          %td= link_to 'Edit', edit_buyer_invoice_path(@buyer, invoice)
+          %td= link_to 'Destroy', [@buyer, invoice], :method => :delete, :data => { :confirm => 'Are you sure?' }
+  
+  %br
+  
+  = link_to 'New Invoice', new_buyer_invoice_path(@buyer)
 
-%br
-
-= link_to 'New Invoice', new_buyer_invoice_path(@buyer)
+= render "layouts/control_panel"

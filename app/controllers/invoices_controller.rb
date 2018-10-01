@@ -2,7 +2,11 @@ require "rexml/document"
 require "builder"
 
 class InvoicesController < ApplicationController
-  before_action :authenticate_user!, :get_buyer
+  layout "application_control"
+  load_and_authorize_resource
+  authorize_resource :except => [:export_xml]
+
+  before_action :get_buyer
 
   def index
     @invoices = @buyer.invoices.all

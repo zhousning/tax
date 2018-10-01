@@ -1,7 +1,7 @@
-%h1 Editing tax_category
+- provide(:title, t('.title'))
 
-= render 'form'
+- content_for :lgside_body do
 
-= link_to 'Show', @tax_category
-\|
-= link_to 'Back', tax_categories_path
+  = render 'form'
+
+= render "layouts/control_panel"

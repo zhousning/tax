@@ -1,30 +1,42 @@
-%h1 Listing buyers
+- provide(:title, t('.title'))
 
-%table
-  %thead
-    %tr
-      %th Alias
-      %th Name
-      %th Duty paragraph
-      %th Account
-      %th Phone
-      %th
-      %th
-      %th
+- content_for :lgside_body do
+  .container
+    .row
+      .col-md-3
+        = render "layouts/system_search"
+      .col-md-2
+        = link_to '添加客户', new_buyer_path, :class => "btn btn-info"
+    .row.buyer-table-ctn
+      .col-md-12
+        %table.table.text-center.table-bordered.table-list-search
+          %thead
+            %tr
+              %th #
+              %th 简称 
+              %th 客户名称
+              %th 购方税号
+              %th 购方银行账号
+              %th 购方地址电话
+              %th 备注
+              %th 复核人
+              %th 收款人
+              %th
+          %tbody
+            - @buyers.each_with_index do |buyer, index|
+              %tr
+                %td= index+1
+                %td= buyer.alias
+                %td= buyer.name
+                %td= buyer.duty_paragraph
+                %td= buyer.account
+                %td= buyer.phone
+                %td= buyer.remark
+                %td= buyer.checker
+                %td= buyer.payee
+                %td
+                  = link_to '编辑', edit_buyer_path(buyer), :class => "btn btn-success"
+                  = link_to '删除', buyer, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "btn btn-danger"
+                  = link_to '发票列表', buyer_invoices_path(buyer), :class => "btn btn-info"
 
-  %tbody
-    - @buyers.each do |buyer|
-      %tr
-        %td= buyer.alias
-        %td= buyer.name
-        %td= buyer.duty_paragraph
-        %td= buyer.account
-        %td= buyer.phone
-        %td= link_to 'Show', buyer
-        %td= link_to 'Edit', edit_buyer_path(buyer)
-        %td= link_to 'Destroy', buyer, :method => :delete, :data => { :confirm => 'Are you sure?' }
-        %td= link_to '发票列表', buyer_invoices_path(buyer)
-
-%br
-
-= link_to 'New Buyer', new_buyer_path
+= render "layouts/control_panel"
