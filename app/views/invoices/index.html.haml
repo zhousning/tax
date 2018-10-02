@@ -3,11 +3,22 @@
 - content_for :lgside_body do
   .container
     .row
-      .col-md-3
+      .col-md-2
         = render "layouts/system_search"
-      .col-md-8
+      .col-md-3
         = link_to '添加发票', new_buyer_invoice_path(@buyer), :class => "btn btn-info"
         = link_to "导出XML", export_xml_buyer_invoices_path(@buyer), :class => 'btn btn-primary'
+      .col-md-5
+        无税金额:
+        %strong.untax-count
+        含税金额:
+        %strong.intax-count
+        税额:
+        %strong.tax-count
+      = label_tag 'select-list', "税率", :class => "col-md-1 control-label text-right"
+      .col-md-1
+        = select nil, nil, cess_options, {:include_blank => false}, :class => "form-control js-index-cess", :id => "select-list"
+
     .row.buyer-table-ctn
       .col-md-12
         %table.table.text-center.table-bordered.table-list-search
@@ -20,19 +31,23 @@
               %th 含税单价
               %th 含税金额
               %th 税率
+              %th 不含税单价
+              %th 不含税金额
               %th 税额
               %th
           %tbody
             - @invoices.each_with_index do |invoice, index|
-              %tr
+              %tr.invoice-body-tr
                 %td= index+1 
                 %td= invoice.standard
                 %td= invoice.unit
-                %td= invoice.amount
-                %td= invoice.tax_unit_price
-                %td= invoice.tax_total
-                %td= invoice.cess
-                %td= invoice.tax_money
+                %td.invoice-index-amount= invoice.amount
+                %td.invoice-index-price= invoice.tax_unit_price
+                %td.invoice-index-total= invoice.tax_total
+                %td.invoice-index-cess= invoice.cess
+                %td.invoice-index-unprice= invoice.untax_unit_price
+                %td.invoice-index-untotal= invoice.untax_total
+                %td.invoice-index-money= invoice.tax_money
                 %td
                   = link_to '编辑', edit_buyer_invoice_path(@buyer, invoice), :class => "btn btn-success"
                   = link_to '删除', [@buyer, invoice], :method => :delete, :data => { :confirm => '确定删除?' }, :class => "btn btn-danger"
