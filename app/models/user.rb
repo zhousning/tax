@@ -40,6 +40,8 @@ class User < ActiveRecord::Base
   end
 
   def assign_default_role
-    self.add_role Setting.roles.new_buyer
+    self.add_role Setting.roles.buyer
+    self.add_role Setting.roles.tax_category
+    self.add_role Setting.roles.invoice
   end
 end

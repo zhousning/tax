@@ -15,3 +15,11 @@
     height: 100%;
   }
 }
+.sessions, .registrations{
+  padding-top: 0px;
+  height: 100%;
+  background: #DE6262;
+  background: -webkit-linear-gradient(to bottom, #FFB88C, #DE6262);
+  background: linear-gradient(to bottom, #FFB88C, #DE6262);
+  padding : 50px 0;
+}

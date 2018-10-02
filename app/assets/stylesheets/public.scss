@@ -15,17 +15,16 @@
     vertical-align: top;
 }
 .mail-box .sm-side {
-    background: none repeat scroll 0 0 #e5e8ef;
     border-radius: 4px 0 0 4px;
     width: 15%;
 }
 .mail-box .lg-side {
-    background: none repeat scroll 0 0 #fff;
+    background: none repeat scroll 0 0 #F3F3F3;
     border-radius: 0 4px 4px 0;
     width: 75%;
 }
 .mail-box .sm-side .user-head {
-    background: none repeat scroll 0 0 #00a8b3;
+    background: none repeat scroll 0 0 #20a8d8;
     border-radius: 4px 0 0;
     color: #fff;
     min-height: 80px;
@@ -66,6 +65,12 @@ a.mail-dropdown {
 .inbox-body {
     padding: 20px;
 }
+.inbox-body-ctn {
+  width: 95%;
+  margin: 30px auto;
+  min-height: 500px;
+  background: white;
+}
 .btn-compose {
     background: none repeat scroll 0 0 #ff6c60;
     color: #fff;
@@ -95,8 +100,9 @@ ul.inbox-nav li a {
     color: #6a6a6a;
     display: inline-block;
     line-height: 45px;
-    padding: 0 20px;
+    padding: 15px 20px;
     width: 100%;
+    font-size: 18px;
 }
 ul.inbox-nav li a:hover, ul.inbox-nav li.active a, ul.inbox-nav li a:focus {
     background: none repeat scroll 0 0 #d5d7de !important;
@@ -141,9 +147,8 @@ ul.labels-info li a i {
     padding: 0 22px;
 }
 .inbox-head {
-    background: none repeat scroll 0 0 #41cac0;
+    //background: none repeat scroll 0 0 #41cac0;
     border-radius: 0 4px 0 0;
-    color: #fff;
     min-height: 80px;
     padding: 20px;
 }
@@ -401,3 +406,18 @@ ul {
 	text-align: center;
 }
 /* login form */
+.error-msg-ctn{
+  position: absolute;
+  width: 100%;
+  top: 20px;
+}
+.nav-bar-bg {
+  background-color: #20a8d8;
+  border-color: #20a8d8;
+  color: white;
+  padding-left: 60px;
+  padding-right: 60px;
+}
+.nav-bar-bg a.navbar-brand, .nav-bar-bg #navbar a{
+  color: white;
+}

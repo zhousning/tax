@@ -64,21 +64,25 @@ def write_permission(class_name, cancan_action, name, description)
 end
 
 def buyer_seller_role
-  admin_class = [Setting.admins.class_name, Setting.users.class_name, Setting.roles.class_name]
-  seller_class = [Setting.shops.class_name, Setting.products.class_name]
+  buyer_permissions = Permission.where(["action = ? and subject_class = ?", "manage", Setting.buyers.class_name])
+  tax_category_permissions = Permission.where(["action = ? and subject_class = ?", "manage", Setting.tax_categories.class_name])
+  invoice_permissions = Permission.where(["action = ? and subject_class = ?", "manage", Setting.invoices.class_name]) 
 
-  buyer_permissions = Permission.where(["action = ? and subject_class not in (?)", "manage", admin_class.concat(seller_class)])
-  seller_permissions = Permission.where(["action = ? and subject_class in (?)", "manage", seller_class])
-
-  buyer_role = Role.where(:name => Setting.roles.new_buyer).first
+  buyer_role = Role.where(:name => Setting.roles.buyer).first
   unless buyer_role
-    buyer_role = Role.create(:name => Setting.roles.new_buyer)
+    buyer_role = Role.create(:name => Setting.roles.buyer)
   end
   buyer_role.permissions = buyer_permissions
 
-  seller_role = Role.where(:name => Setting.roles.new_seller).first
-  unless seller_role
-    seller_role = Role.create(:name => Setting.roles.new_seller)
+  tax_category_role = Role.where(:name => Setting.roles.tax_category).first
+  unless tax_category_role
+    tax_category_role = Role.create(:name => Setting.roles.tax_category)
   end
-  seller_role.permissions = seller_permissions
+  tax_category_role.permissions = tax_category_permissions
+
+  invoice_role = Role.where(:name => Setting.roles.invoice).first
+  unless invoice_role
+    invoice_role = Role.create(:name => Setting.roles.invoice)
+  end
+  invoice_role.permissions = invoice_permissions
 end

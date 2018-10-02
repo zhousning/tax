@@ -1,10 +1,13 @@
 defaults: &defaults
   invoices:
-    index: '查看票据'
+    class_name: "Invoice"
+    index: "查看票据"
   tax_categories:
-    index: '商品税收分类编码库'
+    class_name: "TaxCategory"
+    index: "商品税收分类编码库"
   buyers:
-    index: '客户信息库'
+    class_name: "Buyer"
+    index: "客户信息库"
   admins:
     class_name: "all"
     email: "admin@qq.com"
@@ -13,14 +16,11 @@ defaults: &defaults
   roles:
     class_name: "Role" 
     super_admin: "超级管理员"
-    new_buyer: "新买家"
-    new_seller: "新卖家"
+    buyer: "客户信息管理"
+    tax_category: "商品税收分类编码库管理"
+    invoice: "发票管理"
   permissions:
     super_admin: "管理系统所有资源"
-  shops:
-    class_name: "Shop"
-  products:
-    class_name: "Product"
 
 development:
   <<: *defaults

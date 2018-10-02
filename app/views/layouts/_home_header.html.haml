@@ -1,13 +1,14 @@
-%nav.navbar.navbar-inverse.navbar-fixed-top
-  .container
+%nav.navbar.navbar-inverse.navbar-fixed-top.nav-bar-bg
+  .container-fluid
     .navbar-header
       %a.navbar-brand{:href => root_path} 税票管理系统 
     #navbar.collapse.navbar-collapse
-      %ul.nav.navbar-nav
-        %li.active
-          = link_to Setting.tax_categories.index, tax_categories_path
-        %li
-          = link_to Setting.buyers.index, buyers_path
+      -#
+        %ul.nav.navbar-nav
+          %li.active
+            = link_to Setting.tax_categories.index, tax_categories_path
+          %li
+            = link_to Setting.buyers.index, buyers_path
       %ul.nav.navbar-nav.navbar-right
         - unless user_signed_in?
           %li
@@ -21,9 +22,8 @@
           %li
             = link_to "登录", new_user_session_path
         - else
-          %li
-            = link_to current_user.email, nil 
-          %li
-            = link_to "个人中心", control_users_path
+          -#
+            %li
+              = link_to "个人中心", control_users_path
           %li
             %a{:href=>destroy_user_session_path, "data-method"=>"delete"} 注销

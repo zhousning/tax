@@ -1,34 +1,56 @@
-= form_for [@buyer, @invoice] do |f|
-  - if @invoice.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@invoice.errors.count, "error")} prohibited this invoice from being saved:"
-      %ul
-        - @invoice.errors.full_messages.each do |msg|
-          %li= msg
-
-  .field
-    = f.label :standard
-    = f.text_field :standard
-  .field
-    = f.label :unit
-    = f.text_field :unit
-  .field
-    = f.label :amount
-    = f.text_field :amount
-  .field
-    = f.label :tax_unit_price
-    = f.text_field :tax_unit_price
-  .field
-    = f.label :tax_total
-    = f.text_field :tax_total
-  .field
-    = f.label :cess
-    = f.text_field :cess
-  .field
-    = f.label :tax_money
-    = f.text_field :tax_money
-  .field
-    = f.label '税收分类编码'
-    = select :invoice, :tax_category_id, tax_category_options, {:include_blank=>false}, {:class=>"form-control"}   
-  .actions
-    = f.submit 'Save'
+.container
+  .row
+    .col-md-6.col-md-offset-2
+      = form_for [@buyer, @invoice], :html => {:class => "form-horizontal"}  do |f|
+        - if @invoice.errors.any?
+          #error_explanation
+            %h2= "#{pluralize(@invoice.errors.count, "error")} prohibited this invoice from being saved:"
+            %ul
+              - @invoice.errors.full_messages.each do |msg|
+                %li= msg
+      
+        .form-group
+          = f.label "税收分类编码", :class => "col-md-4 control-label"
+          .col-md-8
+            = select :invoice, :tax_category_id, tax_category_options, {:include_blank=>false}, {:class=>"form-control"}   
+        .form-group
+          = f.label "规格信息", :class => "col-md-4 control-label"
+          .col-md-8
+            = f.text_field :standard, :class => "form-control"
+        .form-group
+          = f.label "计量单位", :class => "col-md-4 control-label"
+          .col-md-8
+            = f.text_field :unit, :class => "form-control"
+        .form-group
+          = f.label "数量", :class => "col-md-4 control-label"
+          .col-md-8
+            = f.number_field :amount, :class => "form-control js-amount"
+        .form-group
+          = f.label "含税单价", :class => "col-md-4 control-label"
+          .col-md-8
+            = f.number_field :tax_unit_price, :class => "form-control js-tax-unit-price"
+        .form-group
+          = f.label "税率", :class => "col-md-4 control-label"
+          .col-md-8
+            = f.select :cess, cess_options, {:include_blank => false}, :class => "form-control js-cess"
+        .form-group
+          = f.label "含税金额", :class => "col-md-4 control-label"
+          .col-md-8
+            = f.number_field :tax_total, :class => "form-control js-tax-total", :readonly => true
+        .form-group
+          = f.label "不含税单价", :class => "col-md-4 control-label"
+          .col-md-8
+            = f.number_field :untax_unit_price, :class => "form-control js-untax-unit-price", :readonly => true
+        .form-group
+          = f.label "不含税金额", :class => "col-md-4 control-label"
+          .col-md-8
+            = f.number_field :untax_total, :class => "form-control js-untax-total", :readonly => true
+        .form-group
+          = f.label "税额", :class => "col-md-4 control-label"
+          .col-md-8
+            = f.number_field :tax_money, :class => "form-control js-tax-money", :readonly => true
+        .form-group
+          .col-md-3.col-md-offset-4
+            = f.submit '保存', :class => "btn btn-success btn-lg btn-block"
+          .col-md-3.col-md-offset-1
+            = link_to '返回', buyer_invoices_path(@buyer, @invoice), :class => "btn btn-danger btn-lg btn-block"

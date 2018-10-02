@@ -7,6 +7,8 @@ class CreateInvoices < ActiveRecord::Migration
       t.float  :tax_unit_price, null: false, default: 0
       t.float  :tax_total,      null: false, default: 0
       t.float  :cess,           null: false, default: 0
+      t.float  :untax_unit_price, null: false, default: 0
+      t.float  :untax_total,      null: false, default: 0
       t.float  :tax_money,      null: false, default: 0 
 
       t.references :tax_category

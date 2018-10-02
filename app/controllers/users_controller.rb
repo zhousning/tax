@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   layout "application_control"
+  before_action :authenticate_user!
   load_resource
   authorize_resource :except => [:control]
 

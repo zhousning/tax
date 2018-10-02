@@ -1,4 +1,26 @@
 - provide(:title, t('.title'))
 
-%h1 Home#index
-%p Find me in app/views/home/index.html.haml
+%section.login-block
+  .container
+    .row
+      .col-md-4.login-sec
+        %h2.text-center 开票系统 
+        %form.login-form
+          .form-group
+            %label.text-uppercase{:for => "exampleInputEmail1"} 邮箱 
+            %input.form-control{:placeholder => "", :type => "text"}/
+          .form-group
+            %label.text-uppercase{:for => "exampleInputPassword1"} 密码
+            %input.form-control{:placeholder => "", :type => "password"}/
+          .form-check
+            %label.form-check-label
+              %input.form-check-input{:type => "checkbox"}/
+              %small 记住我 
+            %button.btn.btn-login.float-right{:type => "submit"} 登录 
+        -#
+          .copy-text
+            Created with
+            %i.fa.fa-heart
+            by
+            %a{:href => "http://grafreez.com"} Grafreez.com
+      .col-md-8.banner-sec

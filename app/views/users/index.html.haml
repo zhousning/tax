@@ -1,19 +1,33 @@
 - provide(:title, t('.title'))
 
 - content_for :lgside_body do
-  %table.table.table-inbox.table-hover
-    %tbody
-      - @users.each do |user|
-        %tr.unread
-          %td.inbox-small-cells
-            = user.id
-          %td.view-message.dont-show
-            = user.email
-          %td.view-message.dont-show
-            - user.roles.each do |role|
-              %label.checkbox-inline
-                = role.name
-          %td.view-message.text-right
-            = link_to "编辑", edit_user_path(user), :class => "btn btn-default"
+  .container
+    .row
+      .col-md-3
+        = render "layouts/system_search"
+      .col-md-8
+    .row.buyer-table-ctn
+      .col-md-12
+        %table.table.text-center.table-bordered.table-list-search
+          %thead
+            %tr
+              %th 序号
+              %th 邮箱
+              %th 权限
+              %th
+          %tbody
+            - @users.each_with_index do |user, index|
+              %tr
+                %td
+                  = index+1
+                %td
+                  = user.email
+                %td
+                  - user.roles.each do |role|
+                    -#
+                      %label.checkbox-inline
+                    = role.name + "  "
+                %td
+                  = link_to "编辑", edit_user_path(user), :class => "btn btn-success"
 
 = render "layouts/control_panel"

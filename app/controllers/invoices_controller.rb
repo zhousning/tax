@@ -3,6 +3,7 @@ require "builder"
 
 class InvoicesController < ApplicationController
   layout "application_control"
+  before_action :authenticate_user!
   load_and_authorize_resource
   authorize_resource :except => [:export_xml]
 
@@ -121,7 +122,7 @@ class InvoicesController < ApplicationController
     end
 
     def invoice_params
-      params.require(:invoice).permit(:standard, :unit, :amount, :tax_unit_price, :tax_total, :cess, :tax_money, :tax_category_attributes)
+      params.require(:invoice).permit(:standard, :unit, :amount, :tax_unit_price, :tax_total, :cess, :tax_money, :tax_category_attributes, :untax_unit_price, :untax_total)
     end
 
     def tax_category_params

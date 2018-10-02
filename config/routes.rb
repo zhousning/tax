@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  root 'home#index'
 
   devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }
   devise_scope :user do
@@ -22,6 +21,7 @@ Rails.application.routes.draw do
 
   resources :tax_categories
 
+  root :to => 'buyers#index'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

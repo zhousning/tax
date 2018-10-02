@@ -1,31 +1,37 @@
 - provide(:title, t('.title'))
 
 - content_for :lgside_body do
-  
-  %p
-    %b Standard:
-    = @invoice.standard
-  %p
-    %b Unit:
-    = @invoice.unit
-  %p
-    %b Amount:
-    = @invoice.amount
-  %p
-    %b Tax unit price:
-    = @invoice.tax_unit_price
-  %p
-    %b Tax total:
-    = @invoice.tax_total
-  %p
-    %b Cess:
-    = @invoice.cess
-  %p
-    %b Tax money:
-    = @invoice.tax_money
-  
-  = link_to 'Edit', edit_buyer_invoice_path(@buyer, @invoice)
-  \|
-  = link_to 'Back', buyer_invoices_path(@buyer, @invoice)
+  .container
+    .row.buyer-table-ctn
+      .col-md-12
+        %table.table.text-center.table-bordered.table-list-search
+          %thead
+            %tr
+              %th #
+              %th 规格信息 
+              %th 计量单位 
+              %th 数量
+              %th 含税单价
+              %th 含税金额
+              %th 税率
+              %th 不含税单价
+              %th 不含税金额
+              %th 税额
+              %th 
+          %tbody
+            %tr
+              %td= 1
+              %td= @invoice.standard
+              %td= @invoice.unit
+              %td= @invoice.amount
+              %td= @invoice.tax_unit_price
+              %td= @invoice.tax_total
+              %td= @invoice.cess
+              %td= @invoice.untax_unit_price
+              %td= @invoice.untax_total
+              %td= @invoice.tax_money
+              %td
+                = link_to '编辑', edit_buyer_invoice_path(@buyer, @invoice), :class => "btn btn-success"
+                = link_to '返回', buyer_invoices_path(@buyer, @invoice), :class => "btn btn-danger"
 
 = render "layouts/control_panel"
