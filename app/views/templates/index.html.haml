@@ -1,0 +1,43 @@
+- provide(:title, t('.title'))
+
+- content_for :lgside_body do
+  .container.template-ctn
+    .row
+      .col-md-12
+        %h2 1.下载模板文件
+        = link_to '模板文件', download_templates_path, :class => "btn btn-primary" 
+    .row
+      .col-md-8
+        %h2 2.上传数据模板
+        = form_tag '', :id => "my-form" do
+          .input-group
+            %span.input-group-btn
+              %button#fake-file-button-browse.btn.btn-default{:type => "button"}
+                %span.glyphicon.glyphicon-file
+                  选择文件
+            = file_field_tag :category_file, :id => "files-input-upload", :style => "display:none"
+            %input#fake-file-input-name.form-control{:disabled => "disabled", :type => "text"}
+            %span.input-group-btn
+              %button#fake-file-button-upload.btn.btn-default{:disabled => "disabled", :type => "button"}
+                %span.glyphicon.glyphicon-upload
+                  上传
+  .container.template-loading
+    .row
+      .cssload-thecube
+        .cssload-cube.cssload-c1
+        .cssload-cube.cssload-c2
+        .cssload-cube.cssload-c4
+        .cssload-cube.cssload-c3
+      %h3.text-center
+        小税正在全力解析......
+  .container.parse-error
+    .row.text-center
+      .col-sm-6.col-sm-offset-3
+        %br/
+        %br/
+        %h2{:style => "color:#c00"} 解析失败
+        = link_to '重新上传', templates_path, :class => "btn btn-success"
+        %br/
+        %br/
+
+= render "layouts/control_panel"

@@ -17,6 +17,6 @@
 #
 
 class Buyer < ActiveRecord::Base
-  has_many :invoices
+  has_many :invoices, :dependent => :destroy
   belongs_to :user
 end

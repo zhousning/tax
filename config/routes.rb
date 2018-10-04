@@ -19,7 +19,15 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :tax_categories
+  resources :tax_categories do
+  end
+
+  resources :templates, :only => [:index] do
+    collection do
+      get 'download'
+      post 'parse_template'
+    end
+  end
 
   root :to => 'buyers#index'
   # Example of regular route:

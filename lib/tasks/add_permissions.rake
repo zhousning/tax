@@ -10,6 +10,7 @@ namespace 'db' do
     end
 
     arr.each do |controller|
+      puts controller.permission
       if controller.permission
         manage_title = I18n.t(controller.controller_name + ".manage.title")
         write_permission(controller.permission, "manage", manage_title, manage_title) 

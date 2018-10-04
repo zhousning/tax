@@ -1,7 +1,7 @@
 - provide(:title, t('.title'))
 
 - content_for :lgside_body do
-  .container
+  .container-fluid
     .row
       .col-md-2
         = render "layouts/system_search"
@@ -25,6 +25,8 @@
           %thead
             %tr
               %th 序号
+              %th 税收分类编码
+              %th 货物名称
               %th 规格型号 
               %th 计量单位
               %th 数量
@@ -39,6 +41,8 @@
             - @invoices.each_with_index do |invoice, index|
               %tr.invoice-body-tr
                 %td= index+1 
+                %td= invoice.tax_category.code 
+                %td= invoice.tax_category.name
                 %td= invoice.standard
                 %td= invoice.unit
                 %td.invoice-index-amount= invoice.amount

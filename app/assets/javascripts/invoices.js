@@ -55,7 +55,7 @@ function write_money_result() {
   var amount = $(".js-amount").val();
   var price = $(".js-tax-unit-price").val();
 
-  var total = parseFloat(amount)*parseFloat(price);
+  var total = (parseFloat(amount)*parseFloat(price)).toFixed(0);
   var result = money_calculator(parseFloat(price), parseFloat(amount), parseFloat(cess))
 
   $(".js-tax-total").val(total);

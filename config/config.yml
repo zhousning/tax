@@ -8,6 +8,9 @@ defaults: &defaults
   buyers:
     class_name: "Buyer"
     index: "客户信息库"
+  templates:
+    class_name: "Template"
+    index: "模板上传"
   admins:
     class_name: "all"
     email: "admin@qq.com"

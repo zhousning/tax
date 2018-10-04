@@ -70,6 +70,8 @@ gem 'settingslogic'
 
 gem 'gon'
 
+gem 'creek'
+
 gem 'carrierwave'
 gem 'mini_magick'
 

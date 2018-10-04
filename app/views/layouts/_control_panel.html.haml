@@ -24,6 +24,11 @@
             = link_to tax_categories_path, :class => "btn" do
               %i.fa.fa-inbox
               = Setting.tax_categories.index
+        - if can? :index, Template
+          %li.js-templates
+            = link_to templates_path, :class => "btn" do
+              %i.fa.fa-inbox
+              = Setting.templates.index
         -#
           - if can? :index, Role 
             %li.js-roles

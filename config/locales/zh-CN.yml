@@ -44,7 +44,9 @@ zh-CN:
       title: "查看税收分类编码"
     edit:
       title: "编辑税收分类编码"
-
+  templates:
+    index:
+      title: "模板上传"
   users:
     control:
       title: "个人中心"
