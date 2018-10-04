@@ -1,4 +1,4 @@
-$(".invoices.edit, .invoices.edit").ready(function() {
+$(".invoices.new, .invoices.edit").ready(function() {
   $(".js-amount, .js-tax-unit-price").keyup(function() {
     write_money_result();
   });
@@ -6,7 +6,34 @@ $(".invoices.edit, .invoices.edit").ready(function() {
   $(".js-cess").change(function() {
     write_money_result();
   });
-})
+
+  $(".invoice-tax-item").click(function() {
+    var that = this;
+    var id = $(that).attr("data-id");
+    var name = $.trim($(that).text());
+    $("#invoice_tax_category_id").attr("value", id); 
+    $("#tax_category").attr("value", name);
+  });
+  
+  $(".js-tax-category-val").keyup(function() {
+    var that = this;
+    var categoryVal = $.trim($(that).val().toLowerCase());
+    var ulCtn = $(".invoice-tax-category-ctn ul"); 
+    var items = $(".invoice-tax-category-ctn .invoice-tax-item"); 
+    items.each(function(i, item) {
+      var itemText = $(item).text().toLowerCase();
+      if (itemText.indexOf(categoryVal) != -1) {
+        $(".without-option").remove();
+        items.eq(i).show();
+      } else {
+        items.eq(i).hide();
+      }
+    });
+    if ($(".invoice-tax-item[style*='none']").length == 0) {
+      ulCtn.append('<li class="list-group-item without-option"><a href="/tax_categories">没有该商品编码，请先添加</a></li>');
+    }
+  });
+});
 
 $(".invoices.index").ready(function() {
   tax_count();

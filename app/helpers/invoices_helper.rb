@@ -7,6 +7,12 @@ module InvoicesHelper
     return options
   end
 
+  def tax_category_val(id)
+    puts ">>>>>>>"
+    puts id
+    @tax_categories.find(id)
+  end
+
   def cess_options
     options = [
       ["17%", 0.17],
