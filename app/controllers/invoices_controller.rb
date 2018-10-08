@@ -11,6 +11,7 @@ class InvoicesController < ApplicationController
 
   def index
     @invoices = @buyer.invoices.all
+    gon.buyer = @buyer.id
   end
 
   def new
@@ -79,7 +80,10 @@ class InvoicesController < ApplicationController
             xml.Sgbz(0)
 
             xml.Spxx {
-              @buyer.invoices.each_with_index do |i, index|
+              #ids = params[:ids].split(" ")
+              ids = params[:invoice_number]
+              invoices = Invoice.find(ids)
+              invoices.each_with_index do |i, index|
                 xml.Sph {
                   xml.Xh(index + 1)
                   xml.Spbm(i.tax_category.code)
@@ -112,6 +116,12 @@ class InvoicesController < ApplicationController
       file.write xml_str
     end
 
+    send_file target_xml, :filename => @buyer.name + '发票模板.xml', :type => "application/force-download", :x_sendfile=>true
+    #redirect_to download_xml_buyer_invoices_path(@buyer)
+  end
+
+  def download_xml
+    target_xml = File.join(Rails.root, "public", "template", @buyer.name + '发票模板.xml') 
     send_file target_xml, :filename => @buyer.name + '发票模板.xml', :type => "application/force-download", :x_sendfile=>true
   end
 

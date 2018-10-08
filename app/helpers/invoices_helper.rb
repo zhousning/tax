@@ -13,6 +13,15 @@ module InvoicesHelper
     @tax_categories.find(id)
   end
 
+  def invoice_limit_options
+    options = [
+      [10000000, 10000000],
+      [1000000, 1000000],
+      [100000, 100000],
+      [10000, 10000],
+    ]
+  end
+
   def cess_options
     options = [
       ["17%", 0.17],

@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :invoices do 
       collection do
         get 'export_xml'
+        get 'download_xml'
       end
     end
   end

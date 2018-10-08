@@ -1,59 +1,68 @@
 - provide(:title, t('.title'))
 
 - content_for :lgside_body do
-  .container-fluid
-    .row
-      .col-md-2
-        = render "layouts/system_search"
-      .col-md-3
-        = link_to '添加发票', new_buyer_invoice_path(@buyer), :class => "btn btn-info"
-        = link_to "导出XML", export_xml_buyer_invoices_path(@buyer), :class => 'btn btn-primary'
-      .col-md-5
-        无税金额:
-        %strong.untax-count
-        含税金额:
-        %strong.intax-count
-        税额:
-        %strong.tax-count
-      = label_tag 'select-list', "税率", :class => "col-md-1 control-label text-right"
-      .col-md-1
-        = select nil, nil, cess_options, {:include_blank => false}, :class => "form-control js-index-cess", :id => "select-list"
+  = form_for @buyer, :url => export_xml_buyer_invoices_path(@buyer), :html => {method: :get} do |f|
+    .container-fluid
+      .row
+        .col-md-2
+          = render "layouts/system_search"
+        .col-md-2
+          = link_to '添加发票', new_buyer_invoice_path(@buyer), :class => "btn btn-info"
+          %button.btn.btn-primary.js-export-xml{:disabled => true} 
+            导出XML
+        = label_tag 'select-list', "发票限额", :class => "col-md-1 control-label text-right"
+        .col-md-1
+          = select nil, nil, invoice_limit_options, {:include_blank => false}, :class => "form-control js-invoice-limit"
+        .col-md-4
+          无税金额:
+          %strong.untax-count
+          含税金额:
+          %strong.intax-count
+          税额:
+          %strong.tax-count
+        = label_tag 'select-list', "税率", :class => "col-md-1 control-label text-right"
+        .col-md-1
+          = select nil, nil, cess_options, {:include_blank => false}, :class => "form-control js-index-cess", :id => "select-list"
 
-    .row.buyer-table-ctn
-      .col-md-12
-        %table.table.text-center.table-bordered.table-list-search
-          %thead
-            %tr
-              %th 序号
-              %th 税收分类编码
-              %th 货物名称
-              %th 规格型号 
-              %th 计量单位
-              %th 数量
-              %th 含税单价
-              %th 含税金额
-              %th 税率
-              %th 不含税单价
-              %th 不含税金额
-              %th 税额
-              %th
-          %tbody
-            - @invoices.each_with_index do |invoice, index|
-              %tr.invoice-body-tr
-                %td= index+1 
-                %td= invoice.tax_category.code 
-                %td= invoice.tax_category.name
-                %td= invoice.standard
-                %td= invoice.unit
-                %td.invoice-index-amount= invoice.amount
-                %td.invoice-index-price= invoice.tax_unit_price
-                %td.invoice-index-total= invoice.tax_total
-                %td.invoice-index-cess= invoice.cess
-                %td.invoice-index-unprice= invoice.untax_unit_price
-                %td.invoice-index-untotal= invoice.untax_total
-                %td.invoice-index-money= invoice.tax_money
-                %td
-                  = link_to '编辑', edit_buyer_invoice_path(@buyer, invoice), :class => "btn btn-success"
-                  = link_to '删除', [@buyer, invoice], :method => :delete, :data => { :confirm => '确定删除?' }, :class => "btn btn-danger"
+      .row.buyer-table-ctn
+        .col-md-12
+          %table.table.text-center.table-bordered.table-list-search
+            %thead
+              %tr
+                %th
+                  = check_box_tag 'invoice-all', ''
+                %th 序号
+                %th 税收分类编码
+                %th 货物名称
+                %th 规格型号 
+                %th 计量单位
+                %th 数量
+                %th 含税单价
+                %th 含税金额
+                %th 税率
+                %th 不含税单价
+                %th 不含税金额
+                %th 税额
+                %th
+            %tbody.invoice-body
+              - @invoices.each_with_index do |invoice, index|
+                %tr.invoice-body-tr
+                  %td
+                    = check_box_tag 'invoice_number[]', invoice.id, nil, :class => "invoice-number"
+                  %td= index+1 
+                  %td= invoice.tax_category.code 
+                  %td= invoice.tax_category.name
+                  %td= invoice.standard
+                  %td= invoice.unit
+                  %td.invoice-index-amount= invoice.amount
+                  %td.invoice-index-price= invoice.tax_unit_price
+                  %td.invoice-index-total= invoice.tax_total
+                  %td.invoice-index-cess= invoice.cess
+                  %td.invoice-index-unprice= invoice.untax_unit_price
+                  %td.invoice-index-untotal= invoice.untax_total
+                  %td.invoice-index-money= invoice.tax_money
+                  %td
+                    = link_to '编辑', edit_buyer_invoice_path(@buyer, invoice), :class => "btn btn-success"
+                    = link_to '删除', [@buyer, invoice], :method => :delete, :data => { :confirm => '确定删除?' }, :class => "btn btn-danger"
 
 = render "layouts/control_panel"
