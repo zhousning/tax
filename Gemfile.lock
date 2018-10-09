@@ -162,6 +162,7 @@ GEM
     momentjs-rails (2.11.1)
       railties (>= 3.1)
     multi_json (1.12.1)
+    mysql2 (0.3.21)
     nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
     orm_adapter (0.5.0)
@@ -267,6 +268,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   mini_magick
+  mysql2 (~> 0.3.13)
   rails (= 4.2.3)
   rolify
   sass-rails (~> 5.0)
