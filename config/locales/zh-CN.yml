@@ -20,6 +20,8 @@ zh-CN:
       title: "查看发票"
     edit:
       title: "编辑发票"
+    batch:
+      title: "批量复制"
 
   buyers:
     manage:

@@ -1,0 +1,33 @@
+- provide(:title, t('.title'))
+
+- content_for :lgside_body do
+  = form_for :invoice, :url => batch_add_buyer_invoices_path(@buyer) do |f|
+    .container-fluid
+      .row
+        .col-md-3
+          = f.submit "保存", :class => "btn btn-block btn-lg btn-success"
+    .container-fluid
+      .row
+        .col-md-2
+          %h3
+            商品名称
+          = f.text_area :name, :rows => 20, :class => "invoice-batch-text"
+        .col-md-2
+          %h3
+            规格型号
+          = f.text_area :standard, :rows => 20, :class => "invoice-batch-text"
+        .col-md-2
+          %h3
+            计量单位
+          = f.text_area :unit, :rows => 20, :class => "invoice-batch-text"
+        .col-md-2
+          %h3
+            数量
+          = f.text_area :amount, :rows => 20, :class => "invoice-batch-text"
+        .col-md-2
+          %h3
+            含税单价
+          = f.text_area :tax_unit_price, :rows => 20, :class => "invoice-batch-text"
+
+
+= render "layouts/control_panel"

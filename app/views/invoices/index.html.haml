@@ -4,22 +4,25 @@
   = form_for @buyer, :url => export_xml_buyer_invoices_path(@buyer), :html => {method: :get} do |f|
     .container-fluid
       .row
+        .col-md-12
+          %h3.text-right
+            无税金额:
+            %strong.untax-count
+            含税金额:
+            %strong.intax-count
+            税额:
+            %strong.tax-count
+      .row
         .col-md-2
           = render "layouts/system_search"
-        .col-md-2
+        .col-md-3
+          = link_to '批量复制', batch_buyer_invoices_path(@buyer), :class => "btn btn-success"
           = link_to '添加发票', new_buyer_invoice_path(@buyer), :class => "btn btn-info"
           %button.btn.btn-primary.js-export-xml{:disabled => true} 
             导出XML
         = label_tag 'select-list', "发票限额", :class => "col-md-1 control-label text-right"
         .col-md-1
           = select nil, nil, invoice_limit_options, {:include_blank => false}, :class => "form-control js-invoice-limit"
-        .col-md-4
-          无税金额:
-          %strong.untax-count
-          含税金额:
-          %strong.intax-count
-          税额:
-          %strong.tax-count
         = label_tag 'select-list', "税率", :class => "col-md-1 control-label text-right"
         .col-md-1
           = select nil, nil, cess_options, {:include_blank => false}, :class => "form-control js-index-cess", :id => "select-list"
@@ -50,8 +53,8 @@
                   %td
                     = check_box_tag 'invoice_number[]', invoice.id, nil, :class => "invoice-number"
                   %td= index+1 
-                  %td= invoice.tax_category.code 
-                  %td= invoice.tax_category.name
+                  %td= invoice.tax_category.nil? ? "" : invoice.tax_category.code 
+                  %td= invoice.tax_category.nil? ? "" : invoice.tax_category.name
                   %td= invoice.standard
                   %td= invoice.unit
                   %td.invoice-index-amount= invoice.amount
