@@ -168,12 +168,6 @@ class InvoicesController < ApplicationController
     end
 
     send_file target_xml, :filename => @buyer.name + '发票模板.xml', :type => "application/force-download", :x_sendfile=>true
-    #redirect_to download_xml_buyer_invoices_path(@buyer)
-  end
-
-  def download_xml
-    target_xml = File.join(Rails.root, "public", "template", @buyer.name + '发票模板.xml') 
-    send_file target_xml, :filename => @buyer.name + '发票模板.xml', :type => "application/force-download", :x_sendfile=>true
   end
 
   private
