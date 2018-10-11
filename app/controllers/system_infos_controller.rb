@@ -11,6 +11,6 @@ class SystemInfosController < ApplicationController
   private
 
     def system_info_params
-      params.require(:system_info).permit(:version)
+      params.require(:system_info).permit(:version, :tax_category_version, :national_tax_version)
     end
 end

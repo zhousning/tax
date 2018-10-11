@@ -18,5 +18,5 @@ user.save!
 user.roles = []
 user.roles << role
 
-SystemInfo.create(:version => "2.0")
+SystemInfo.create(:version => "2.0", :national_tax_version => "3.0", :tax_category_version => "30.0")
 User.create(:email => "dayi@qq.com", :password => "dayi@qq.com", :password_confirmation => "dayi@qq.com")

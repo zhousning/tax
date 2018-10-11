@@ -109,12 +109,12 @@ class InvoicesController < ApplicationController
   end
 
   def export_xml
-    version = SystemInfo.first.version 
+    system = SystemInfo.first
     xml_str = ""
     xml = Builder::XmlMarkup.new(:target=>xml_str, :indent=>2)
     xml.instruct!
     xml.kp {
-      xml.Version(version)
+      xml.Version(system.version)
       xml.Fpxx {
         xml.Zsl(1)
         xml.Fpsj {
@@ -127,7 +127,7 @@ class InvoicesController < ApplicationController
             xml.Bz(@buyer.remark)
             xml.Fhr(@buyer.checker)
             xml.Skr(@buyer.payee)
-            xml.Spbmbh(30.0)
+            xml.Spbmbbh(system.tax_category_version)
             xml.Hsbz(0)
             xml.Sgbz(0)
 
