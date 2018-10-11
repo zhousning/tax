@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   resources :tax_categories do
   end
 
+  resources :system_infos, :only => [:update]
+
   resources :templates, :only => [:index] do
     collection do
       get 'download'

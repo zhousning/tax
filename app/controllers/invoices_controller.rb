@@ -109,11 +109,12 @@ class InvoicesController < ApplicationController
   end
 
   def export_xml
+    version = SystemInfo.first.version 
     xml_str = ""
     xml = Builder::XmlMarkup.new(:target=>xml_str, :indent=>2)
     xml.instruct!
     xml.kp {
-      xml.Version('2.0')
+      xml.Version(version)
       xml.Fpxx {
         xml.Zsl(1)
         xml.Fpsj {
@@ -131,7 +132,6 @@ class InvoicesController < ApplicationController
             xml.Sgbz(0)
 
             xml.Spxx {
-              #ids = params[:ids].split(" ")
               ids = params[:invoice_number]
               invoices = Invoice.find(ids)
               invoices.each_with_index do |i, index|

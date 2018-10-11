@@ -7,6 +7,7 @@ class TaxCategoriesController < ApplicationController
 
   def index
     @tax_categories = current_user.tax_categories.all
+    @system_info = SystemInfo.first
   end
 
   def show

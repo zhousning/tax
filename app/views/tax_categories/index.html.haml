@@ -7,6 +7,15 @@
         = render "layouts/system_search"
       .col-md-2
         = link_to '添加商品税收分类编码', new_tax_category_path, :class => "btn btn-info"
+      .col-md-6
+        .container-fluid
+          = form_for @system_info, :html => {:class => "form-inline"} do |f|
+            .form-group
+              = f.label "版本", :class => "text-right"
+              = f.text_field :version, :class => "form-control"
+            = f.submit "更新版本", :class => "btn btn-success"
+
+      .col-md-2
     .row.buyer-table-ctn
       .col-md-12
         %table.table.text-center.table-bordered.table-list-search
