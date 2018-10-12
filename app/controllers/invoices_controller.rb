@@ -112,8 +112,8 @@ class InvoicesController < ApplicationController
     system = SystemInfo.first
     xml_str = ""
     xml = Builder::XmlMarkup.new(:target=>xml_str, :indent=>2)
-    xml.instruct!
-    xml.kp {
+    xml.instruct! :xml, :version=>"1.0", :encoding=>"GB2312"
+    xml.Kp {
       xml.Version(system.version)
       xml.Fpxx {
         xml.Zsl(1)
@@ -146,9 +146,9 @@ class InvoicesController < ApplicationController
                   xml.Spmc(i.tax_category.name)
                   xml.Ggxh(i.standard)
                   xml.Jldw(i.unit)
-                  xml.Dj(i.tax_unit_price)
+                  xml.Dj(i.untax_unit_price)
                   xml.Sl(i.amount)
-                  xml.Je(i.tax_total)
+                  xml.Je(i.untax_total)
                   xml.Slv(i.cess)
                   xml.Se(i.tax_money)
                   xml.Kce(0)
