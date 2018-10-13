@@ -138,10 +138,10 @@ class InvoicesController < ApplicationController
                 xml.Sph {
                   xml.Xh(index + 1)
                   xml.Spbm(i.tax_category.code)
-                  xml.Qyspbm()
+                  xml.Qyspbm("")
                   xml.Syyhzcbz(0)
-                  xml.Yhzcsm()
-                  xml.Lslbz()
+                  xml.Yhzcsm("")
+                  xml.Lslbz("")
 
                   xml.Spmc(i.tax_category.name)
                   xml.Ggxh(i.standard)
@@ -163,7 +163,7 @@ class InvoicesController < ApplicationController
     template_dir = File.join(Rails.root, "public", "template")
     Dir::mkdir(template_dir) unless File.directory?(template_dir)
     target_xml = File.join(Rails.root, "public", "template", @buyer.name + '发票模板.xml') 
-    File.open(target_xml, "w+") do |file|
+    File.open(target_xml, "w+", encoding: 'gb2312') do |file|
       file.write xml_str
     end
 
@@ -187,6 +187,10 @@ class InvoicesController < ApplicationController
     def fromat_number(number, decimal)
       result = format("%." + decimal.to_s + "f", number)
       result.to_f
+    end
+
+    def encoding inStr
+      Iconv.conv('iso8859-1//IGNORE', 'UTF-8//IGNORE', inStr)
     end
 end
 
