@@ -130,6 +130,7 @@ GEM
       nokogiri (~> 1.6.0)
       ruby_parser (~> 3.5)
     i18n (0.7.0)
+    iconv (1.0.5)
     inherited_resources (1.6.0)
       actionpack (>= 3.2, < 5)
       has_scope (~> 0.6.0.rc)
@@ -162,7 +163,6 @@ GEM
     momentjs-rails (2.11.1)
       railties (>= 3.1)
     multi_json (1.12.1)
-    mysql2 (0.3.21)
     nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
     orm_adapter (0.5.0)
@@ -265,10 +265,10 @@ DEPENDENCIES
   dotenv-rails
   gon
   haml-rails
+  iconv
   jbuilder (~> 2.0)
   jquery-rails
   mini_magick
-  mysql2 (~> 0.3.13)
   rails (= 4.2.3)
   rolify
   sass-rails (~> 5.0)

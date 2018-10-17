@@ -33,7 +33,7 @@ Rails.application.routes.draw do
     end
   end
 
-  root :to => 'buyers#index'
+  root :to => 'home#index'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

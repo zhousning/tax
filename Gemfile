@@ -46,7 +46,7 @@ group :development, :test do
 end
 
 group :production do
-  gem 'mysql2', '~> 0.3.13'
+  #gem 'mysql2', '~> 0.3.13'
 end
 
 gem 'bootstrap-sass', '~> 3.3.5'
@@ -71,6 +71,9 @@ gem 'settingslogic'
 #gem 'rest-client'
 
 gem 'gon'
+
+gem 'iconv'
+
 
 gem 'creek'
 
@@ -103,3 +106,4 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.17.37'
 #gem 'rack-cors', :require => 'rack/cors'
 
 #gem 'yaml_db'
+

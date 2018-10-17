@@ -1,7 +1,7 @@
 - provide(:title, t('.title'))
 
 - content_for :lgside_body do
-  .container
+  .container-fluid
     .row
       .col-md-3
         = render "layouts/system_search"
@@ -29,5 +29,6 @@
                     = role.name + "  "
                 %td
                   = link_to "编辑", edit_user_path(user), :class => "btn btn-success"
+                  = link_to '删除', user, :method => :delete, :data => { :confirm => '确定删除该用户吗?' }, :class => "btn btn-danger"
 
 = render "layouts/control_panel"
